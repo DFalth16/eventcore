@@ -70,6 +70,9 @@
         <button type="submit" class="btn btn-p" style="padding: 10px 20px">Aplicar Filtros</button>
         <a href="/reportes" class="btn btn-g" style="padding: 10px 15px">Limpiar</a>
     </form>
+    <a href="/reportes/eventos?year={{ $year }}" class="btn btn-g" style="background: rgba(0, 212, 255, 0.1); color: var(--cyan); border-color: rgba(0, 212, 255, 0.2)">
+        <i class="bi bi-table"></i> Reporte Detallado
+    </a>
     <button onclick="exportFullPDF()" class="btn btn-g" style="background: var(--violet-g); color: var(--violet); border-color: rgba(139,92,246,0.2)">
         <i class="bi bi-file-earmark-pdf"></i> Exportar PDF General
     </button>

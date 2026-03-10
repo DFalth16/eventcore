@@ -117,6 +117,26 @@ class ReporteController extends Controller
                     ->get();
                 $label = 'Eventos por Sede';
                 break;
+            case 'eventos':
+                $data = DB::table('eventos as e')
+                    ->join('estados_evento as ee', 'e.id_estado', '=', 'ee.id_estado')
+                    ->join('categorias_evento as ce', 'e.id_categoria', '=', 'ce.id_categoria')
+                    ->join('sedes as s', 'e.id_sede', '=', 's.id_sede')
+                    ->select(
+                        'e.id_evento', 'e.codigo_evento', 'e.titulo', 'e.fecha_inicio', 'e.fecha_fin', 
+                        'e.cupo_maximo', 'ee.nombre as estado', 'ce.nombre as categoria', 's.nombre as sede',
+                        DB::raw('(SELECT COUNT(*) FROM inscripciones i WHERE i.id_evento = e.id_evento) as total_inscritos')
+                    )
+                    ->whereYear('e.fecha_inicio', $year)
+                    ->get()
+                    ->map(function($ev) {
+                        $ev->porcentaje_ocupacion = $ev->cupo_maximo > 0 
+                            ? round(($ev->total_inscritos / $ev->cupo_maximo) * 100, 2) 
+                            : 0;
+                        return $ev;
+                    });
+                $label = 'Reporte Detallado de Eventos';
+                return view('reportes.eventos', compact('data', 'tipo', 'label', 'year'));
         }
 
         return view('reportes.show', compact('data', 'tipo', 'label', 'year'));
