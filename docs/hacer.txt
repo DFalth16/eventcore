@@ -1,12 +1,12 @@
-7. Implementación del Frontend con Vue
-Se deberá demostrar la implementación del frontend utilizando Vue. En la menos una funcionalidad
-Explicar:
- componentes desarrollados
- vistas principales
- interacción con el usuario
- consumo de la API
-Ejemplo de funcionalidades:
- listado de eventos
- creación de eventos   
- edición de eventos
- eliminación de Eventos
+6. Seguridad y autenticación
+Se deberá explicar el sistema de autenticación implementado.
+Incluir:
+ login de usuarios
+ generación de Bearer Token
+ uso de middleware para proteger rutas
+ almacenamiento de contraseñas con hashing
+También mencionar mecanismos de protección contra:
+ SQL Injection
+ CSRF
+ manejo seguro de sesiones
+ validación de datos del usuario 

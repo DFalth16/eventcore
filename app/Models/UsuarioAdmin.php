@@ -14,10 +14,10 @@ class UsuarioAdmin extends Authenticatable
     public    $timestamps = false;
 
     protected $fillable = [
-        'id_rol', 'nombres', 'apellidos', 'email', 'password_hash', 'activo',
+        'id_rol', 'nombres', 'apellidos', 'email', 'password_hash', 'activo', 'api_token',
     ];
 
-    protected $hidden = ['password_hash'];
+    protected $hidden = ['password_hash', 'api_token'];
 
     // Alias para que Laravel Auth use password_hash
     public function getAuthPassword()

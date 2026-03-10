@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
@@ -27,7 +28,7 @@ class AuthController extends Controller
             ->where('activo', 1)
             ->first();
 
-        if ($usuario && password_verify($credentials['password'], $usuario->password_hash)) {
+        if ($usuario && Hash::check($credentials['password'], $usuario->password_hash)) {
             Auth::guard('admin')->login($usuario);
             $request->session()->regenerate();
             return redirect('/dashboard');
@@ -61,7 +62,7 @@ class AuthController extends Controller
             'nombres'       => $request->nombres,
             'apellidos'     => $request->apellidos,
             'email'         => $request->email,
-            'password_hash' => password_hash($request->password, PASSWORD_DEFAULT),
+            'password_hash' => Hash::make($request->password),
             'id_rol'        => $request->id_rol,
             'activo'        => 1,
         ]);
