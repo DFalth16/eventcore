@@ -14,7 +14,6 @@ async function cargarClima() {
             const widget = document.getElementById('weather-widget');
             widget.innerHTML = `
                 <p>${data.city}: ${weather.main.temp}°C</p>
-                <p>${weather.weather[0].description}</p>
             `;
         }
     } catch (error) {

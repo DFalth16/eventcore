@@ -204,7 +204,6 @@
                 widget.innerHTML = `
                     <div style="display:flex; align-items:center; gap:8px">
                         <strong>${data.city}</strong> | ${Math.round(weather.main.temp)}°C 
-                        <span style="color:var(--t3)">(${weather.weather[0].description})</span>
                     </div>
                 `;
             }
@@ -228,6 +227,13 @@
                 left: 'prev,next today',
                 center: 'title',
                 right: 'multiMonthYear,dayGridMonth,timeGridWeek,dayGridDay,listMonth'
+            },
+            buttonText: {
+                year: 'Año',
+                month: 'Mes',
+                week: 'Semana',
+                day: 'Día',
+                list: 'Lista'
             },
             // ... resto de tu configuración original ...
             events: '/api/calendario/eventos',
