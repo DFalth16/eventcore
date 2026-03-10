@@ -52,7 +52,7 @@ class CalendarioController extends Controller
             'id_categoria' => 'required|integer|min:1',
             'id_sede'      => 'required|integer|min:1',
             'fecha_inicio' => 'required|date',
-            'fecha_fin'    => 'required|date|after_event_start',
+            'fecha_fin'    => 'required|date|after:fecha_inicio',
             'cupo_maximo'  => 'required|integer|min:1',
         ]);
 

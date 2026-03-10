@@ -1,4 +1,0 @@
-11. Evidencias de funcionamiento
-Incluir evidencias como:
- funcionamiento del frontend
- integración entre frontend y backend
