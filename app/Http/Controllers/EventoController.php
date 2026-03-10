@@ -4,11 +4,18 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 class EventoController extends Controller
 {
     public function index(Request $request)
     {
+        // Asegurar que el usuario tenga un api_token para el frontend (Vue)
+        $admin = auth('admin')->user();
+        if ($admin && !$admin->api_token) {
+            $admin->update(['api_token' => Str::random(80)]);
+        }
+
         $search    = trim($request->input('q', ''));
         $catFilter = $request->input('cat', '');
         $estFilter = $request->input('estado', '');

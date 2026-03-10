@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
 class AuthController extends Controller
 {
@@ -29,6 +30,10 @@ class AuthController extends Controller
             ->first();
 
         if ($usuario && Hash::check($credentials['password'], $usuario->password_hash)) {
+            // Generar/Actualizar api_token al iniciar sesión web para que el frontend lo use
+            $token = Str::random(80);
+            $usuario->update(['api_token' => $token]);
+            
             Auth::guard('admin')->login($usuario);
             $request->session()->regenerate();
             return redirect('/dashboard');

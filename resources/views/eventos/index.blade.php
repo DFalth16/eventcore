@@ -94,11 +94,20 @@
             const events = ref([]);
             const loading = ref(true);
             const searchQuery = ref('');
+            const apiToken = '{{ auth("admin")->user()->api_token }}';
+
+            // Configurar axios para usar el token en todas las peticiones de este componente
+            const api = axios.create({
+                headers: {
+                    'Authorization': `Bearer ${apiToken}`,
+                    'Accept': 'application/json'
+                }
+            });
 
             const fetchEvents = async () => {
                 loading.value = true;
                 try {
-                    const response = await axios.get('/api/eventos');
+                    const response = await api.get('/api/eventos');
                     if (response.data.success) {
                         events.value = response.data.data;
                     }
@@ -140,7 +149,7 @@
                 if (!confirm(`¿Estás seguro de que deseas cancelar el evento "${ev.titulo}"?`)) return;
                 
                 try {
-                    const response = await axios.delete(`/api/eventos/${ev.id_evento}`);
+                    const response = await api.delete(`/api/eventos/${ev.id_evento}`);
                     if (response.data.success) {
                         // Refresh the list
                         await fetchEvents();
