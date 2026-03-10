@@ -57,7 +57,7 @@ class CalendarioController extends Controller
         ]);
 
         // Nota: El validador after:fecha_inicio a veces falla con formatos datetime locales de JS
-        // Hacemos una validación manual si es necesario o usamos after_or_equal si es el mismo minuto
+        // Hacemos una validación manual si es necesario 
         if (strtotime($request->fecha_fin) <= strtotime($request->fecha_inicio)) {
             return back()->with('error', 'La fecha de fin debe ser posterior a la de inicio.');
         }

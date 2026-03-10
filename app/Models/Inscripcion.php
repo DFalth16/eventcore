@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Models;
-
+//AS
 use Illuminate\Database\Eloquent\Model;
 
 class Inscripcion extends Model

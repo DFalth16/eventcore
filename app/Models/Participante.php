@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Models;
-
+//PARTICPANTE
 use Illuminate\Database\Eloquent\Model;
 
 class Participante extends Model

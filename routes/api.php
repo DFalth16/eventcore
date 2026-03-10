@@ -8,7 +8,7 @@ use App\Http\Controllers\Api\ApiAuthController;
 Route::post('/login', [ApiAuthController::class, 'login']);
 Route::get('/external-todos', [ExternalDataController::class, 'index']);
 
-// Rutas Protegidas
+// Rutas Protegida
 Route::middleware('api.token')->group(function () {
     Route::post('/logout', [ApiAuthController::class, 'logout']);
     
