@@ -1,14 +1,12 @@
- Implementación de la API REST
-Se deberá presentar la API desarrollada.
-Incluir:
- endpoints disponibles
- métodos HTTP utilizados
- estructura de respuestas JSON
-Ejemplo:
-Método Endpoint Descripción
-GET /api/recurso listar registros
-GET /api/recurso/{id} obtener registro
-POST /api/recurso crear registro
-PUT /api/recurso/{id} actualizar registro
-DELETE /api/recurso/{id} eliminar registro
-Explicar brevemente la lógica implementada en los controladores.
+7. Implementación del Frontend con Vue
+Se deberá demostrar la implementación del frontend utilizando Vue. En la menos una funcionalidad
+Explicar:
+ componentes desarrollados
+ vistas principales
+ interacción con el usuario
+ consumo de la API
+Ejemplo de funcionalidades:
+ listado de eventos
+ creación de eventos   
+ edición de eventos
+ eliminación de Eventos
