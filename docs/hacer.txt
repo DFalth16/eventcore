@@ -1,12 +1,13 @@
-6. Seguridad y autenticación
-Se deberá explicar el sistema de autenticación implementado.
-Incluir:
- login de usuarios
- generación de Bearer Token
- uso de middleware para proteger rutas
- almacenamiento de contraseñas con hashing
-También mencionar mecanismos de protección contra:
- SQL Injection
- CSRF
- manejo seguro de sesiones
- validación de datos del usuario 
+8. Consumo de API mediante AJAX
+Se deberá explicar cómo el frontend consume la API.
+Tecnologías utilizadas:
+ AJAX
+Ejemplo de llamada a la API:
+axios.get('/api/cursos')
+.then(response => {
+ this.cursos = response.data
+})
+Explicar cómo se envían:
+ peticiones GET
+ peticiones POST
+ autenticación mediante token
