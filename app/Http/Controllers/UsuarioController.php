@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class UsuarioController extends Controller
 {
@@ -41,7 +42,7 @@ class UsuarioController extends Controller
             'nombres'       => $request->nombres,
             'apellidos'     => $request->apellidos,
             'email'         => $request->email,
-            'password_hash' => password_hash($request->password, PASSWORD_DEFAULT),
+            'password_hash' => Hash::make($request->password),
             'activo'        => 1,
             'creado_en'     => now(),
         ]);
@@ -75,7 +76,7 @@ class UsuarioController extends Controller
         ];
 
         if (!empty($request->password)) {
-            $data['password_hash'] = password_hash($request->password, PASSWORD_DEFAULT);
+            $data['password_hash'] = Hash::make($request->password);
         }
 
         DB::table('usuarios_admin')->where('id_usuario', $id)->update($data);
