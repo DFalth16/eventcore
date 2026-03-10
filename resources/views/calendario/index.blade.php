@@ -192,7 +192,7 @@
 <script>
     let calendar;
     
-    // Función para actualizar el clima (NUEVO)
+    // Función para actualizar el clima 
     async function updateWeather() {
         try {
             const response = await fetch('/api/external-todos?city=La Paz');

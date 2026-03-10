@@ -5,15 +5,6 @@ use App\Http\Controllers\Api\EventoApiController;
 use App\Http\Controllers\Api\ExternalDataController;
 use App\Http\Controllers\Api\ApiAuthController;
 
-/*
-|--------------------------------------------------------------------------
-| API Routes
-|--------------------------------------------------------------------------
-*/
-
-// Rutas Públicas (Mantenemos estas fuera del middleware de token si son necesarias sin auth)
-// El usuario pidió que el login devuelva un token, y con ese token hacer los CRUDs.
-
 Route::post('/login', [ApiAuthController::class, 'login']);
 Route::get('/external-todos', [ExternalDataController::class, 'index']);
 
