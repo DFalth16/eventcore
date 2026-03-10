@@ -1,57 +1,87 @@
-# Guía de Pruebas API - EventCore
+# Guía de Pruebas API con Postman - EventCore
 
-Esta guía explica cómo utilizar **Postman** (o herramientas similares como Insomnia/Curl) para autenticarse y gestionar eventos.
+Esta guía detalla los pasos para probar los endpoints de la API y capturar las evidencias para el informe.
 
-## 1. Obtención del Token (Login)
-
-Para obtener tu Bearer Token, utiliza tus mismas credenciales del sistema administrativo.
+## 1. Autenticación (Login)
+**Objetivo:** Obtener el token de acceso.
 
 - **Método:** `POST`
-- **URL:** `http://localhost:8000/api/login`
-- **Cabeceras:**
-  - `Content-Type: application/json`
-- **Cuerpo (JSON):**
+- **URL:** `{{base_url}}/api/login`
+- **Body (raw JSON):**
 ```json
 {
-    "email": "tu_usuario@ejemplo.com",
-    "password": "tu_password"
+    "email": "admin@eventcore.com",
+    "password": "admin"
 }
 ```
-
-**Respuesta Exitosa:**
-```json
-{
-    "success": true,
-    "message": "Login exitoso",
-    "data": {
-        "user": { ... },
-        "token": "UN_TOKEN_MUY_LARGO_DE_80_CARACTERES"
-    }
-}
-```
-*Copia el valor del campo `token`.*
-
-## 2. Acceso a Rutas Protegidas (Ejemplo: Listar Eventos)
-
-Una vez que tienes el token, debes enviarlo en todas las peticiones a la API.
-
-- **Método:** `GET`
-- **URL:** `http://localhost:8000/api/eventos`
-- **Cabeceras:**
-  - `Authorization: Bearer <TU_TOKEN_AQUÍ>`
-  - `Accept: application/json`
-
-## 3. CRUD de Eventos
-
-Todas las rutas protegidas requieren el mismo esquema de autorización.
-
-| Operación | Método | Endpoint | Cabecera Auth |
-|---|---|---|---|
-| Listar | `GET` | `/api/eventos` | `Bearer <token>` |
-| Ver Uno | `GET` | `/api/eventos/{id}` | `Bearer <token>` |
-| Crear | `POST` | `/api/eventos` | `Bearer <token>` |
-| Actualizar| `PUT` | `/api/eventos/{id}` | `Bearer <token>` |
-| Eliminar | `DELETE`| `/api/eventos/{id}` | `Bearer <token>` |
+> [!TIP]
+> Captura la respuesta JSON donde se vea el campo `"token"`.
 
 ---
-*Nota: Si el token es inválido o no se envía, el sistema devolverá un error `401 Unauthorized`.*
+
+## 2. Listar Eventos (Read)
+**Objetivo:** Verificar el acceso protegido y la recuperación de datos.
+
+- **Método:** `GET`
+- **URL:** `{{base_url}}/api/eventos`
+- **Headers:**
+    - `Authorization: Bearer <TU_TOKEN>`
+    - `Accept: application/json`
+
+---
+
+## 3. Crear Registro (Create)
+**Objetivo:** Demostrar la inserción de datos vía API.
+
+- **Método:** `POST`
+- **URL:** `{{base_url}}/api/eventos`
+- **Body (raw JSON):**
+```json
+{
+    "titulo": "Evento de Prueba Postman",
+    "id_categoria": 1,
+    "id_sede": 1,
+    "fecha_inicio": "2026-05-20 09:00:00",
+    "fecha_fin": "2026-05-20 18:00:00",
+    "cupo_maximo": 100,
+    "descripcion": "Creado desde Postman para el informe",
+    "precio_entrada": 0,
+    "es_gratuito": true
+}
+```
+
+---
+
+## 4. Actualizar Registro (Update)
+**Objetivo:** Probar la modificación de un recurso existente.
+
+- **Método:** `PUT` (o `PATCH`)
+- **URL:** `{{base_url}}/api/eventos/{id}` (reemplaza {id} por el id del evento creado)
+- **Body (raw JSON):**
+```json
+{
+    "titulo": "Evento Actualizado vía API",
+    "id_categoria": 1,
+    "fecha_inicio": "2026-05-21 10:00:00",
+    "fecha_fin": "2026-05-21 19:00:00",
+    "descripcion": "Descripción modificada correctamente"
+}
+```
+
+---
+
+## 5. Eliminar Registro (Delete)
+**Objetivo:** Verificar la eliminación/cancelación lógica.
+
+- **Método:** `DELETE`
+- **URL:** `{{base_url}}/api/eventos/{id}`
+
+---
+### Resumen de Endpoints Probados
+| Funcionalidad | Método | Path |
+|---|---|---|
+| Login | `POST` | `/api/login` |
+| Listar | `GET` | `/api/eventos` |
+| Crear | `POST` | `/api/eventos` |
+| Actualizar | `PUT` | `/api/eventos/{id}` |
+| Eliminar | `DELETE` | `/api/eventos/{id}` |

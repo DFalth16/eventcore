@@ -1,13 +1,4 @@
-8. Consumo de API mediante AJAX
-Se deberá explicar cómo el frontend consume la API.
-Tecnologías utilizadas:
- AJAX
-Ejemplo de llamada a la API:
-axios.get('/api/cursos')
-.then(response => {
- this.cursos = response.data
-})
-Explicar cómo se envían:
- peticiones GET
- peticiones POST
- autenticación mediante token
+11. Evidencias de funcionamiento
+Incluir evidencias como:
+ funcionamiento del frontend
+ integración entre frontend y backend
