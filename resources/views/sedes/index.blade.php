@@ -4,7 +4,7 @@
 @section('content')
 <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px">
   <h2 style="font-weight:200">Listado de <strong>Sedes</strong></h2>
-  <a href="/sedes/crear" class="btn btn-p">+ Nueva Sede</a>
+  <a href="/sedes/crear" class="btn btn-p"><i class="bi bi-plus-lg"></i> Nueva Sede</a>
 </div>
 <div class="card">
   <table class="et">

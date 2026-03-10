@@ -7,6 +7,7 @@
 <title>EventCore · @yield('title', 'Panel')</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@200;300;400;500;600&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 @yield('head_scripts')
 <style>
 :root{
@@ -81,20 +82,32 @@ nav{flex:1;overflow-y:auto;padding-bottom:10px}
 <div class="shell">
   <aside class="sb">
     <a class="sb-logo" href="/dashboard">
-      <div class="sb-icon">⚡</div>
+      <div class="sb-icon"><i class="bi bi-lightning-charge-fill"></i></div>
       <span class="sb-name"><b>Event</b>Core</span>
     </a>
     <p class="sb-lbl">Principal</p>
     <nav>
-      <a class="na {{ Request::is('dashboard') ? 'on' : '' }}" href="/dashboard">📊 Dashboard</a>
-      <a class="na {{ Request::is('eventos*') ? 'on' : '' }}" href="/eventos">🗓 Eventos</a>
-      <a class="na {{ Request::is('participantes*') ? 'on' : '' }}" href="/participantes">👥 Participantes</a>
-      <a class="na {{ Request::is('usuarios*') ? 'on' : '' }}" href="/usuarios">👤 Usuarios</a>
-      <a class="na {{ Request::is('sedes*') ? 'on' : '' }}" href="/sedes">📍 Sedes</a>
+      <a class="na {{ Request::is('dashboard') ? 'on' : '' }}" href="/dashboard"><i class="bi bi-grid-1x2"></i> Dashboard</a>
+      
+      <a class="na {{ Request::is('calendario*') ? 'on' : '' }}" href="/calendario"><i class="bi bi-calendar3"></i> Calendario</a>
+      <a class="na {{ Request::is('reportes*') ? 'on' : '' }}" href="/reportes"><i class="bi bi-graph-up-arrow"></i> Reportes</a>
+
+      @if(auth('admin')->user()->id_rol <= 2)
+        <p class="sb-lbl">Gestión</p>
+        <a class="na {{ Request::is('eventos*') ? 'on' : '' }}" href="/eventos"><i class="bi bi-calendar-event"></i> Eventos</a>
+        <a class="na {{ Request::is('participantes*') ? 'on' : '' }}" href="/participantes"><i class="bi bi-people"></i> Participantes</a>
+        <a class="na {{ Request::is('sedes*') ? 'on' : '' }}" href="/sedes"><i class="bi bi-geo-alt"></i> Sedes</a>
+      @endif
+
+      @if(auth('admin')->user()->id_rol == 1)
+        <p class="sb-lbl">Administración</p>
+        <a class="na {{ Request::is('usuarios*') ? 'on' : '' }}" href="/usuarios"><i class="bi bi-person-badge"></i> Usuarios</a>
+      @endif
+
       <div style="margin:20px 18px;border-top:1px solid var(--border)"></div>
       <form method="POST" action="/logout" style="margin:2px 10px">
         @csrf
-        <button type="submit" class="na" style="width:calc(100% - 0px);background:none;border:none;cursor:pointer;text-align:left">🚪 Cerrar Sesión</button>
+        <button type="submit" class="na" style="width:calc(100% - 0px);background:none;border:none;cursor:pointer;text-align:left"><i class="bi bi-box-arrow-right"></i> Cerrar Sesión</button>
       </form>
     </nav>
   </aside>
@@ -107,10 +120,10 @@ nav{flex:1;overflow-y:auto;padding-bottom:10px}
     </header>
     <div class="con">
       @if(session('success'))
-        <div class="alert alert-success">✓ {{ session('success') }}</div>
+        <div class="alert alert-success"><i class="bi bi-check-circle"></i> {{ session('success') }}</div>
       @endif
       @if(session('error'))
-        <div class="alert alert-error">✕ {{ session('error') }}</div>
+        <div class="alert alert-error"><i class="bi bi-x-circle"></i> {{ session('error') }}</div>
       @endif
       @yield('content')
     </div>

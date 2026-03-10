@@ -4,7 +4,7 @@
 @section('content')
 <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px">
   <h2 style="font-weight:200">Listado de <strong>Eventos</strong></h2>
-  <a href="/eventos/crear" class="btn btn-p">+ Nuevo Evento</a>
+  <a href="/eventos/crear" class="btn btn-p"><i class="bi bi-plus-lg"></i> Nuevo Evento</a>
 </div>
 
 <div class="card" style="margin-bottom:20px">
@@ -12,7 +12,7 @@
     <input type="text" name="q" class="form-control" placeholder="Buscar por título, código o sede..." value="{{ $search }}" style="flex:1">
     <button type="submit" class="btn btn-g">Buscar</button>
     @if($search)
-      <a href="/eventos" class="btn btn-g">✕</a>
+      <a href="/eventos" class="btn btn-g"><i class="bi bi-x-lg"></i></a>
     @endif
   </form>
 </div>

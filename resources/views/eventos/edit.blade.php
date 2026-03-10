@@ -4,7 +4,7 @@
 @section('content')
 <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:24px">
   <h2 style="font-weight:200">Editar <strong>Evento</strong></h2>
-  <a href="/eventos" class="btn btn-g">← Volver</a>
+  <a href="/eventos" class="btn btn-g"><i class="bi bi-arrow-left"></i> Volver</a>
 </div>
 
 @if($errors->any())

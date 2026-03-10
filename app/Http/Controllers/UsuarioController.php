@@ -85,7 +85,39 @@ class UsuarioController extends Controller
 
     public function destroy($id)
     {
-        DB::table('usuarios_admin')->where('id_usuario', $id)->update(['activo' => 0]);
-        return redirect('/usuarios')->with('success', 'Usuario desactivado.');
+        $currentAdminId = auth('admin')->id();
+
+        // Evitar que el usuario se elimine a sí mismo
+        if ($currentAdminId == $id) {
+            return redirect('/usuarios')->with('error', 'No puedes eliminar tu propia cuenta.');
+        }
+
+        try {
+            DB::transaction(function () use ($id, $currentAdminId) {
+                // Reasignar eventos al administrador actual para evitar error de integridad
+                DB::table('eventos')
+                    ->where('id_organizador', $id)
+                    ->update(['id_organizador' => $currentAdminId]);
+
+                // Eliminar el usuario
+                DB::table('usuarios_admin')->where('id_usuario', $id)->delete();
+            });
+
+            return redirect('/usuarios')->with('success', 'Usuario eliminado y sus eventos han sido reasignados a tu cuenta.');
+        } catch (\Exception $e) {
+            return redirect('/usuarios')->with('error', 'Error al eliminar: ' . $e->getMessage());
+        }
+    }
+
+    public function toggleStatus($id)
+    {
+        $usuario = DB::table('usuarios_admin')->where('id_usuario', $id)->first();
+        if (!$usuario) return redirect('/usuarios')->with('error', 'Usuario no encontrado.');
+
+        $nuevoEstado = $usuario->activo ? 0 : 1;
+        DB::table('usuarios_admin')->where('id_usuario', $id)->update(['activo' => $nuevoEstado]);
+
+        $msg = $nuevoEstado ? 'Usuario activado.' : 'Usuario desactivado.';
+        return redirect('/usuarios')->with('success', $msg);
     }
 }

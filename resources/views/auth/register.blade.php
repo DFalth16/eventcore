@@ -6,6 +6,7 @@
 <title>EventCore · Registro</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@200;300;400;500;600&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 <style>
 :root{--c0:#04080f;--c1:#080e1a;--c2:#0c1525;--border:rgba(255,255,255,0.055);--border2:rgba(255,255,255,0.1);--cyan:#00d4ff;--cyan2:#0099cc;--rose:#ff4d6d;--rose-g:rgba(255,77,109,0.1);--lime:#a3e635;--lime-g:rgba(163,230,53,0.11);--t1:#deeaf2;--t2:#6e90a8;--t3:#2e4d62;--t4:#1b3044;--r:14px;--r2:9px;}
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -36,7 +37,7 @@ canvas#bg{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.5}
 <div class="rw">
   <div class="rc">
     <div class="logo">
-      <div class="logo-icon">⚡</div>
+      <div class="logo-icon"><i class="bi bi-lightning-charge-fill"></i></div>
       <span class="logo-text"><b>Event</b>Core</span>
     </div>
     <p style="text-align:center;font-size:14px;color:var(--t2);margin-bottom:24px;">Crear nueva cuenta administrativa</p>

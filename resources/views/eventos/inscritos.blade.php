@@ -16,9 +16,9 @@
 <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:24px">
   <div>
     <h2 style="font-weight:200;font-size:24px">Lista de <strong style="color:var(--cyan)">Inscritos</strong></h2>
-    <div style="font-size:13px;color:var(--t3);margin-top:4px">📍 {{ $evento->sede }} &nbsp;·&nbsp; 🗓 {{ date('d/m/Y', strtotime($evento->fecha_inicio)) }}</div>
+    <div style="font-size:13px;color:var(--t3);margin-top:4px"><i class="bi bi-geo-alt"></i> {{ $evento->sede }} &nbsp;·&nbsp; <i class="bi bi-calendar3"></i> {{ date('d/m/Y', strtotime($evento->fecha_inicio)) }}</div>
   </div>
-  <a href="/eventos" class="btn btn-g">← Volver a Eventos</a>
+  <a href="/eventos" class="btn btn-g"><i class="bi bi-arrow-left"></i> Volver a Eventos</a>
 </div>
 
 @php
@@ -44,7 +44,7 @@
 </div>
 
 <div class="card" style="margin-bottom:24px">
-  <div style="font-size:14px;font-weight:500;margin-bottom:16px;color:var(--t1)">✍️ Inscribir Participante Manualmente</div>
+  <div style="font-size:14px;font-weight:500;margin-bottom:16px;color:var(--t1)"><i class="bi bi-pencil-square"></i> Inscribir Participante Manualmente</div>
   <p style="font-size:12.5px;color:var(--t3);margin-bottom:16px">Ingrese el email de un participante ya registrado en el sistema para inscribirlo.</p>
 
   @if(!empty($errors))
@@ -63,11 +63,11 @@
     <button type="submit" class="btn btn-p" style="height:44px">Inscribir</button>
   </form>
   <div style="margin-top:12px;font-size:12px;color:var(--t3)">
-    ¿El participante no está registrado? <a href="/participantes/crear" style="color:var(--cyan)">Crear participante →</a>
+    ¿El participante no está registrado? <a href="/participantes/crear" style="color:var(--cyan)">Crear participante <i class="bi bi-arrow-right-short"></i></a>
   </div>
   @else
   <div style="color:var(--rose);font-size:13px;padding:14px;background:var(--rose-g);border-radius:10px;border:1px solid rgba(255,77,109,.2)">
-    🚫 Este evento ha alcanzado su aforo máximo de {{ (int)$evento->cupo_maximo }} personas.
+    <i class="bi bi-ban"></i> Este evento ha alcanzado su aforo máximo de {{ (int)$evento->cupo_maximo }} personas.
   </div>
   @endif
 </div>
@@ -76,7 +76,7 @@
   <div style="font-size:14px;font-weight:500;margin-bottom:20px;color:var(--t1)">Listado de Participantes Inscritos</div>
   @if($inscritos->isEmpty())
     <div style="text-align:center;padding:50px 20px;color:var(--t3)">
-      <div style="font-size:40px;margin-bottom:12px;opacity:.4">📋</div>
+      <div style="font-size:40px;margin-bottom:12px;opacity:.4"><i class="bi bi-clipboard-data"></i></div>
       <div>No hay participantes inscritos en este evento aún.</div>
     </div>
   @else

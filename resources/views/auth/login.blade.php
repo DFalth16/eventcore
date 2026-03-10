@@ -6,6 +6,7 @@
 <title>EventCore · Iniciar Sesión</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@200;300;400;500;600&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 <style>
 :root{
   --c0:#04080f;--c1:#080e1a;--c2:#0c1525;
@@ -45,7 +46,7 @@ canvas#bg{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.5}
 <div class="login-wrapper">
   <div class="login-card">
     <div class="logo">
-      <div class="logo-icon">⚡</div>
+      <div class="logo-icon"><i class="bi bi-lightning-charge-fill"></i></div>
       <span class="logo-text"><b>Event</b>Core</span>
     </div>
     <p style="text-align:center;font-size:14px;color:var(--t2);margin-bottom:24px;">Gestión interna de eventos</p>

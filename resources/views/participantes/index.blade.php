@@ -4,14 +4,14 @@
 @section('content')
 <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px">
   <h2 style="font-weight:200">Listado de <strong>Participantes</strong></h2>
-  <a href="/participantes/crear" class="btn btn-p">+ Nuevo Participante</a>
+  <a href="/participantes/crear" class="btn btn-p"><i class="bi bi-plus-lg"></i> Nuevo Participante</a>
 </div>
 
 <div class="card" style="margin-bottom:20px">
   <form method="GET" action="/participantes" style="display:flex;gap:10px">
     <input type="text" name="q" class="form-control" placeholder="Buscar por nombre, email o documento..." value="{{ $search }}" style="flex:1">
     <button type="submit" class="btn btn-g">Buscar</button>
-    @if($search)<a href="/participantes" class="btn btn-g">✕</a>@endif
+    @if($search)<a href="/participantes" class="btn btn-g"><i class="bi bi-x-lg"></i></a>@endif
   </form>
 </div>
 

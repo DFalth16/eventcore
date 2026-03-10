@@ -4,7 +4,7 @@
 @section('content')
 <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px">
   <h2 style="font-weight:200">Listado de <strong>Usuarios</strong></h2>
-  <a href="/usuarios/crear" class="btn btn-p">+ Nuevo Usuario</a>
+  <a href="/usuarios/crear" class="btn btn-p"><i class="bi bi-plus-lg"></i> Nuevo Usuario</a>
 </div>
 <div class="card">
   <table class="et">
@@ -26,12 +26,26 @@
         </td>
         <td style="font-size:12px">{{ date('d/m/Y', strtotime($u->creado_en)) }}</td>
         <td>
-          <div style="display:flex;gap:8px">
-            <a href="/usuarios/{{ $u->id_usuario }}/editar" style="color:var(--cyan);text-decoration:none;font-size:12px">Editar</a>
-            @if($u->activo)
-            <form method="POST" action="/usuarios/{{ $u->id_usuario }}" style="display:inline" onsubmit="return confirm('¿Desactivar este usuario?')">
+          <div style="display:flex;gap:8px;align-items:center">
+            <a href="/usuarios/{{ $u->id_usuario }}/editar" style="color:var(--cyan);text-decoration:none;font-size:12px" title="Editar">
+              <i class="bi bi-pencil-square"></i>
+            </a>
+
+            <!-- Toggle Status -->
+            <form method="POST" action="/usuarios/{{ $u->id_usuario }}/status" style="display:inline">
+              @csrf @method('PATCH')
+              <button type="submit" style="background:none;border:none;color:{{ $u->activo ? 'var(--amber)' : 'var(--lime)' }};cursor:pointer;font-size:16px;padding:0" title="{{ $u->activo ? 'Desactivar' : 'Activar' }}">
+                <i class="bi {{ $u->activo ? 'bi-toggle-on' : 'bi-toggle-off' }}"></i>
+              </button>
+            </form>
+
+            <!-- Delete (Solo si no es el usuario actual) -->
+            @if(auth('admin')->id() != $u->id_usuario)
+            <form method="POST" action="/usuarios/{{ $u->id_usuario }}" style="display:inline" onsubmit="return confirm('¿ELIMINAR PERMANENTEMENTE a este usuario? Esta acción no se puede deshacer.')">
               @csrf @method('DELETE')
-              <button type="submit" style="background:none;border:none;color:var(--rose);cursor:pointer;font-size:12px;font-family:inherit">Desactivar</button>
+              <button type="submit" style="background:none;border:none;color:var(--rose);cursor:pointer;font-size:14px;padding:0" title="Eliminar">
+                <i class="bi bi-trash"></i>
+              </button>
             </form>
             @endif
           </div>

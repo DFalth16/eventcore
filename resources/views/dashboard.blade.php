@@ -25,22 +25,22 @@
   <div class="sc-card">
     <div style="font-size:10px;color:var(--t3);letter-spacing:1px">TOTAL EVENTOS</div>
     <div class="sc-val">{{ $stats['total_eventos'] }}</div>
-    <div style="position:absolute;right:20px;top:20px;opacity:0.1;font-size:24px">📅</div>
+    <div style="position:absolute;right:20px;top:20px;opacity:0.1;font-size:24px"><i class="bi bi-calendar-event"></i></div>
   </div>
   <div class="sc-card">
     <div style="font-size:10px;color:var(--t3);letter-spacing:1px">EVENTOS ACTIVOS</div>
     <div class="sc-val" style="color:var(--lime)">{{ $stats['eventos_activos'] }}</div>
-    <div style="position:absolute;right:20px;top:20px;opacity:0.1;font-size:24px">🔥</div>
+    <div style="position:absolute;right:20px;top:20px;opacity:0.1;font-size:24px"><i class="bi bi-lightning-fill"></i></div>
   </div>
   <div class="sc-card">
     <div style="font-size:10px;color:var(--t3);letter-spacing:1px">PARTICIPANTES</div>
     <div class="sc-val" style="color:var(--amber)">{{ $stats['total_asistentes'] }}</div>
-    <div style="position:absolute;right:20px;top:20px;opacity:0.1;font-size:24px">👥</div>
+    <div style="position:absolute;right:20px;top:20px;opacity:0.1;font-size:24px"><i class="bi bi-people"></i></div>
   </div>
   <div class="sc-card">
-    <div style="font-size:10px;color:var(--t3);letter-spacing:1px">INGRESOS TOTALES</div>
-    <div class="sc-val" style="color:var(--violet)">${{ number_format($stats['total_ingresos'],0,',','.') }}</div>
-    <div style="position:absolute;right:20px;top:20px;opacity:0.1;font-size:24px">💰</div>
+    <div style="font-size:10px;color:var(--t3);letter-spacing:1px">SEDES DISPONIBLES</div>
+    <div class="sc-val" style="color:var(--cyan)">{{ $stats['total_sedes'] }}</div>
+    <div style="position:absolute;right:20px;top:20px;opacity:0.1;font-size:24px"><i class="bi bi-geo-alt"></i></div>
   </div>
 </div>
 
@@ -48,7 +48,7 @@
   <div class="card">
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px">
       <h3 style="font-size:14px;font-weight:500;color:var(--t1)">Eventos Estratégicos</h3>
-      <a href="/eventos" style="font-size:11px;color:var(--cyan);text-decoration:none">Ver todos →</a>
+      <a href="/eventos" style="font-size:11px;color:var(--cyan);text-decoration:none">Ver todos <i class="bi bi-arrow-right-short"></i></a>
     </div>
     <table class="et">
       <thead><tr><th>Evento / Categoría</th><th>Fecha</th><th>Ocupación</th><th>Estado</th></tr></thead>

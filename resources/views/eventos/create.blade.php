@@ -4,12 +4,12 @@
 @section('content')
 <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:24px">
   <h2 style="font-weight:200">Crear <strong>Evento</strong></h2>
-  <a href="/eventos" class="btn btn-g">← Volver</a>
+  <a href="/eventos" class="btn btn-g"><i class="bi bi-arrow-left"></i> Volver</a>
 </div>
 
 @if($errors->any())
   <div class="alert alert-error">
-    @foreach($errors->all() as $err)<div>• {{ $err }}</div>@endforeach
+    @foreach($errors->all() as $err)<div><i class="bi bi-dot"></i> {{ $err }}</div>@endforeach
   </div>
 @endif
 
