@@ -62,20 +62,27 @@
 @endsection
 
 @section('content')
-<div style="margin-bottom: 20px; display: flex; gap: 10px; align-items: center; background: var(--c1); padding: 15px; border-radius: var(--r); border: 1px solid var(--border)">
-    <div style="font-size: 13px; color: var(--t2); font-weight: 500">Ir a:</div>
-    <select id="jumpMonth" class="form-control" style="width: 140px; margin-bottom: 0">
-        <option value="0">Enero</option><option value="1">Febrero</option><option value="2">Marzo</option>
-        <option value="3">Abril</option><option value="4">Mayo</option><option value="5">Junio</option>
-        <option value="6">Julio</option><option value="7">Agosto</option><option value="8">Septiembre</option>
-        <option value="9">Octubre</option><option value="10">Noviembre</option><option value="11">Diciembre</option>
-    </select>
-    <select id="jumpYear" class="form-control" style="width: 100px; margin-bottom: 0">
-        @for($y = date('Y')-2; $y <= date('Y')+5; $y++)
-            <option value="{{ $y }}" {{ $y == date('Y') ? 'selected' : '' }}>{{ $y }}</option>
-        @endfor
-    </select>
-    <button class="btn btn-p" onclick="jumpToDate()" style="padding: 10px 15px"><i class="bi bi-arrow-right-short"></i> Ir</button>
+<div style="margin-bottom: 20px; display: flex; gap: 20px; align-items: center; background: var(--c1); padding: 15px; border-radius: var(--r); border: 1px solid var(--border)">
+    
+    <div style="display: flex; gap: 10px; align-items: center;">
+        <div style="font-size: 13px; color: var(--t2); font-weight: 500">Ir a:</div>
+        <select id="jumpMonth" class="form-control" style="width: 140px; margin-bottom: 0">
+            <option value="0">Enero</option><option value="1">Febrero</option><option value="2">Marzo</option>
+            <option value="3">Abril</option><option value="4">Mayo</option><option value="5">Junio</option>
+            <option value="6">Julio</option><option value="7">Agosto</option><option value="8">Septiembre</option>
+            <option value="9">Octubre</option><option value="10">Noviembre</option><option value="11">Diciembre</option>
+        </select>
+        <select id="jumpYear" class="form-control" style="width: 100px; margin-bottom: 0">
+            @for($y = date('Y')-2; $y <= date('Y')+5; $y++)
+                <option value="{{ $y }}" {{ $y == date('Y') ? 'selected' : '' }}>{{ $y }}</option>
+            @endfor
+        </select>
+        <button class="btn btn-p" onclick="jumpToDate()" style="padding: 10px 15px"><i class="bi bi-arrow-right-short"></i> Ir</button>
+    </div>
+
+    <div id="weather-widget" style="margin-left: auto; color: var(--t1); font-size: 13px; border-left: 1px solid var(--border); padding-left: 20px;">
+        <i class="bi bi-cloud-sun"></i> Cargando clima...
+    </div>
 </div>
 
 <div id='calendar'></div>
@@ -184,7 +191,33 @@
 @section('scripts')
 <script>
     let calendar;
+    
+    // Función para actualizar el clima (NUEVO)
+    async function updateWeather() {
+        try {
+            const response = await fetch('/api/external-todos?city=La Paz');
+            const data = await response.json();
+            
+            if (data.status === 'success' && data.weather) {
+                const weather = data.weather;
+                const widget = document.getElementById('weather-widget');
+                widget.innerHTML = `
+                    <div style="display:flex; align-items:center; gap:8px">
+                        <strong>${data.city}</strong> | ${Math.round(weather.main.temp)}°C 
+                        <span style="color:var(--t3)">(${weather.weather[0].description})</span>
+                    </div>
+                `;
+            }
+        } catch (error) {
+            console.error("No se pudo cargar el clima", error);
+        }
+    }
+
     document.addEventListener('DOMContentLoaded', function() {
+        // Inicializar Clima
+        updateWeather();
+
+        // Inicializar FullCalendar
         var calendarEl = document.getElementById('calendar');
         calendar = new FullCalendar.Calendar(calendarEl, {
             initialView: 'dayGridMonth',
@@ -196,25 +229,13 @@
                 center: 'title',
                 right: 'multiMonthYear,dayGridMonth,timeGridWeek,dayGridDay,listMonth'
             },
-            buttonText: {
-                today: 'Hoy',
-                year: 'Año',
-                month: 'Mes',
-                week: 'Semana',
-                day: 'Día',
-                list: 'Lista'
-            },
+            // ... resto de tu configuración original ...
             events: '/api/calendario/eventos',
-            eventClick: function(info) {
-                showModal(info.event);
-            },
-            select: function(info) {
-                showAddModal(info.startStr, info.endStr);
-            }
+            eventClick: function(info) { showModal(info.event); },
+            select: function(info) { showAddModal(info.startStr, info.endStr); }
         });
         calendar.render();
 
-        // Set current month in select
         document.getElementById('jumpMonth').value = new Date().getMonth();
     });
 
